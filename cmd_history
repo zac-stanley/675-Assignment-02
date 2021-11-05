@@ -1,0 +1,9 @@
+cd C:\NewMapsPlus\Map675\675-Assignment-02
+git status
+git stage
+git add
+git add package.json
+git status
+git commit -m "add package.json"
+git push
+doskey /h > c:cmd_history
