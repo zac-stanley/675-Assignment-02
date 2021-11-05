@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/zac-stanley/675-Assignment-02/issues"
   },
-  "homepage": "https://github.com/zac-stanley/675-Assignment-02#readme"
+  "homepage": "https://github.com/zac-stanley/675-Assignment-02#readme",
+  "dependencies": {
+    "chalk": "^4.1.2"
+  }
 }
