@@ -1,0 +1,26 @@
+cd C:\NewMapsPlus\Map675\675-Assignment-02
+npms install chalk --save
+npm install chalk --save
+git status
+git stage package.json
+git stage package-lock.json
+git status
+git commit -m "updated package.json and created package-lock.json"
+git push
+node app.js
+mkdir scripts
+node ../data/fs-require.js
+node ../scripts/fs-require.js
+node C:\NewMapsPlus\Map675\675-Assignment-02\scripts\fs-require.js
+node ../scripts/fs-sync.js
+node ./scripts/fs-sync.js
+node C:\NewMapsPlus\Map675\675-Assignment-02\scripts\fs-sync.js
+node fs-sync.js
+node scripts/fs-sync.js
+node C:\NewMapsPlus\Map675\675-Assignment-02\scripts\fs-sync.js
+cd C:\NewMapsPlus\Map675\675-Assignment-02\scriptsC:\NewMapsPlus\Map675\675-Assignment-02\scripts
+cd C:\NewMapsPlus\Map675\675-Assignment-02\scripts
+node fs-sync.js
+node fs-async.js
+doskey /h C:\NewMapsPlus\Map675\675-Assignment-02\cmdhist.txt
+doskey /h > C:\NewMapsPlus\Map675\675-Assignment-02\cmdhist.txt

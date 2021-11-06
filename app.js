@@ -1,3 +1,9 @@
-"use strict"
+"use strict" 
 
-console.log("hello node");
+// var chalk = require('chalk');
+
+// console.log(chalk.green("hello node"));
+
+import chalk from 'chalk';
+
+console.log(chalk.green("hello node"));
