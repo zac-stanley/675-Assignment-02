@@ -7,41 +7,22 @@
 4. Convert all data to geoJSON
 5. Create web map
 
-#### Start Creating Files
-1. Create *package.json* using `init npm`
+#### Create Files and Install Packages
+1. Create *package.json* using `npm init`
 2. Create *app.js* with `echo > app.js`
-3. Create *index.html* with `echo > index.html`
+3. Install chalk `npm install chalk --save`
+4. Install csv2geojson `npm install csv2geojson`
+4. Create *index.html* with `echo > index.html`
     - Add boilder plate html, CSS and JavaScript to *index.html*
-4. Create *project-files* directory and copy extracted shapefiles there
+5. Create *project-files* directory 
 
-
-#### Review Data and simplify where necessary
-1. Use mapshaper to inspect data with `mapshaper RegionsUCB.shp -info` and `mapshaper RLightingMergeUCBRegions.shp -info`
-2. Project both files with mapshaper `mapshaper LightingMergeUCBRegions.shp -proj wgs84 -o RegionsUCB_WGS84.shp` and `mapshaper RegionsUCB.shp -proj wgs84 -o LightingUCB_WGS84.shp`
-3. Create a geoJSON of lighting points, reducing the precision and removing some fields with `mapshaper LightingUCB_WGS84.shp -filter-fields POINT_X,POINT_Y,Region,ID,Abbrev -o precision=.0001 format=geojson ../data/LightingUCB_WGS84.json`
-4. Convert regions to geoJSON with `mapshaper RegionsUCB_WGS84.shp -o format=geojson ../data/RegionsUCB_WGS84.json`
-5. Inspect resultant data:
-    - `mapshaper ../data/LightingUCB_WGS84.json -info`
-    [info]
-    ===========================
-    Layer:    LightingUCB_WGS84
-    ---------------------------
-    Type:     point
-    Records:  2,004
-    Bounds:   -122.27,37.87,-122.25,37.88
-    CRS:      +proj=longlat +datum=WGS84
-    Source:   ../data/LightingUCB_WGS84.json
-
-    Attribute data
-    ---------+-----------------
-    Field   | First value
-    ---------+-----------------
-    Abbrev  | 'LED'
-    ID      | 'LED-1064'
-    POINT_X | -122.26223458
-    POINT_Y |   37.8685161217
-    Region  | 'Region 6'
-    ---------+-----------------
+#### Parsing, Inspecting, Filtering and Converting Data
+1. Convert *lighting-ucb.csv* to json with `node csv2json.js`
+2. Filter data and remove columns with `node csv2json-filtered.js` onlye keep keeping 'Region' and 'ID' fields
+3. Use mapshaper to inspect data with regions polygon shapefile `mapshaper RegionsUCB.shp -info` it's in CRS NAD83 State Plane Zone3
+4. Project file with mapshaper `mapshaper RegionsUCB.shp -proj wgs84 -o RegionsUCB_WGS84.shp`
+5. Convert *RegionsUCB_WGS84.shp* to geoJSON with `mapshaper RegionsUCB_WGS84.shp -o format=geojson ../data/regions-ucb-wgs84.json`
+6. Inspect output with:
     - `mapshaper ../data/RegionsUCB_WGS84.json -info`
     [info]
     ===============================
@@ -61,3 +42,12 @@
     Shape_Area | 1800889.11037
     Shape_Leng |    8503.75566012
     ------------+------------------
+
+#### Web Mapping
+1. Load boilerplate HTML, CSS and JaveScript
+2. Update the Leaflet map origin 
+
+```js
+  center: [37.8719, -122.2585],
+  zoom: 16
+```

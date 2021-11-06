@@ -44,14 +44,39 @@
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy;<a href="https://carto.com/attribution">CARTO</a>'
     }).addTo(map);
 
-    d3.json('data/LightingUCB_WGS84.json').then((data) => {
-      L.geoJson(data).addTo(map)
-  });
+    // use D3 fetch to request data with async requests
+      const regionsData = d3.json('data/regions-ucb-counts.json');
+      const colorsData = d3.json('data/vividcolors.json');
+      const lightingData = d3.json('data/lighting-ucb.json');
 
-  d3.json('data/RegionsUCB_WGS84.json').then((data) => {
-      L.geoJson(data).addTo(map)
-  });
+      // use Promise to wait until data is all loaded
+      Promise.all([regionsData, colorsData, lightingData]).then(drawMap);
 
+
+      function drawMap(data) {
+        // function is called when Promise is fulfilled and data is ready
+
+        // inspect array of data
+        console.log(data);
+
+        // pull out separate data arrays and assign to variables
+        const regions = data[0];
+        const colors = data[1];
+        const lights = data[2];
+
+        // create a layerGroup with the geojson data
+        const regionsLayerGroup = L.geoJson(regions, {
+          style: function (feature) {
+            // use the colors object to style each polygon a unique color
+            return {
+              color: colors.Vivid[10][feature.properties.region - 1],
+              fillOpacity: .6
+            }
+          }
+        }).addTo(map);
+
+  }
+      
 
   </script>
 </body>
