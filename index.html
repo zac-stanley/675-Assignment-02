@@ -20,15 +20,48 @@
       top: 0;
       bottom: 0;
     }
+    #ui {
+    position: absolute;
+    z-index: 1000; /* place above map */
+    bottom: 18px;
+    right: 18px;
+    padding: 6px 12px;
+    background: rgba(256,256,256,.9);
+    }
+    #ui ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    #ui li {
+        margin-bottom: 6px;
+    }
+    #ui a {
+        text-decoration: none;
+    }
+    #ui a:hover {
+        font-weight: bold;
+    }
+    .highlight {
+        font-weight: bold;
+    }
+
   </style>
 </head>
 
 <body>
 
   <div id="map"></div>
+  <div id="ui">
+    <h3>UC Berkeley Central Campus Regions</h3>
+    <h4>(number of street and path lights)</h4>
+    <ul id="legend-list"></ul>
+</div>
+
 
   <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
   <script src="https://d3js.org/d3-fetch.v1.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
   <script>
     // map options
     const options = {
@@ -69,7 +102,7 @@
           style: function (feature) {
             // use the colors object to style each polygon a unique color
             return {
-              color: colors.Vivid[10][feature.properties.region - 1],
+              color: colors.Vivid[6][feature.properties.region - 1],
               fillOpacity: .6
             }
           }
