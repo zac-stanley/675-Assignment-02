@@ -151,10 +151,34 @@
         }
         }).addTo(map);
 
-  }
-      
+        // select all the list items and on mouseover
+        $('.legend-item').on('mouseover', function () {
+          // extract the specific number from the specific item
+          // being moused over
+          var num = this.id.replace('region-', '');
+          // send this number as an argument to the highlightRegion function
+          highlightRegion(num);
+        });
 
-  </script>
+        function highlightRegion(regionNum) {
+          // loop through the regions polygons
+          regionsLayerGroup.eachLayer(function (layer) {
+            // if the region matches the one we're mousing over
+            if (layer.feature.properties.region === regionNum) {
+              // change the layer style
+              layer.setStyle({
+                fillOpacity: .8
+              }).bringToFront();
+            } else {
+              // return to original
+              layer.setStyle({
+                fillOpacity: .6
+              });
+            }
+          });
+        }
+  }
+</script>
 </body>
 
 </html>
