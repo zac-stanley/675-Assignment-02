@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
 
-  <title>Lesson 02 template</title>
+  <title>UC Berkeley Lighting Regions</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
   <style>
     body {
@@ -97,6 +97,9 @@
         const colors = data[1];
         const lights = data[2];
 
+        L.geoJson(lights).addTo(map);
+
+
         // pull out separate data arrays for access in legend
         const regionsLegend = regionsData[0];
         const colorsLegend = colorsData[0];
@@ -110,7 +113,6 @@
         for(let i = 1; i <= regions.features.length; i++) {
             legendList.append('<li class="legend-item" id="region-' + i + '"><a style="color:' + colors.Vivid[6][i -1] + '" href="#">Region ' + i + ' (<span></span>)</a></li>');
         }
-
 
         // create a layerGroup with the geojson data
         const regionsLayerGroup = L.geoJson(regions, {
