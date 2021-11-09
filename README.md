@@ -18,6 +18,7 @@
 5. Convert *RegionsUCB_WGS84.shp* to geoJSON with `mapshaper RegionsUCB_WGS84.shp -o format=geojson ../data/regions-ucb-wgs84.json`
 6. Inspect output with:
     - `mapshaper ../data/RegionsUCB_WGS84.json -info`
+    ```js
     [info]
     ===============================
     Layer:    RegionsUCB_WGS84
@@ -36,6 +37,7 @@
     Shape_Area | 1800889.11037
     Shape_Leng |    8503.75566012
     ------------+------------------
+    ```
 7. Count the number of lights by campus regions by parsing *lighting-ucb.csv* and looping through the csv and determining if 'Region' property in *regions-ucb-wgs84.json* matches and outputs results to *regions-ucb-counts*
 
 
