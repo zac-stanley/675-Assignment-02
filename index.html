@@ -7,6 +7,8 @@
 
   <title>UC Berkeley Lighting Regions</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+  <link rel="stylesheet" href="libs/Leaflet.markercluster/MarkerCluster.Default.css"> />
+  <link rel="stylesheet" href="libs/Leaflet.markercluster/MarkerCluster.css"> />
   <style>
     body {
       font-family: sans-serif;
@@ -61,6 +63,7 @@
   <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
   <script src="https://d3js.org/d3-fetch.v1.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="libs/Leaflet.markercluster/leaflet.markercluster.js"></script>
 
   <script>
     // map options
@@ -97,9 +100,6 @@
         const colors = data[1];
         const lights = data[2];
 
-        L.geoJson(lights).addTo(map);
-
-
         // pull out separate data arrays for access in legend
         const regionsLegend = regionsData[0];
         const colorsLegend = colorsData[0];
@@ -113,6 +113,26 @@
         for(let i = 1; i <= regions.features.length; i++) {
             legendList.append('<li class="legend-item" id="region-' + i + '"><a style="color:' + colors.Vivid[6][i -1] + '" href="#">Region ' + i + ' (<span></span>)</a></li>');
         }
+
+        // create new markerClusterGroup
+        const markers = L.markerClusterGroup();
+
+        // loop through all our signals features
+        lights.features.forEach(function(feature) {
+          // create a new Leaflet marker for each
+          let coords = feature.geometry.coordinates;
+          let marker = L.marker([coords[1], coords[0]]);
+          
+          // bind a tooltip to the marker
+          marker.bindTooltip("ID: " + feature.properties.id);
+          
+          // add the marker to the markerClusterGroup
+          markers.addLayer(marker);
+
+        });
+        // add the markerClusterGroup to the map
+        map.addLayer(markers);
+
 
         // create a layerGroup with the geojson data
         const regionsLayerGroup = L.geoJson(regions, {

@@ -1,11 +1,4 @@
 ### 675-Assignment-02 - Lighting Types by Campus Regions - UC Berkeley
-#### Proposed workflow:
-1. Symbolize trails by type of path (dedicated vs. bicycle boulevard) - use this to create figure ground
-2. Set 'Name' field to title case in QGIS because these will be used for tooltips in web map and should look the same (realized later this could have been done with ogr2ogr)
-3. Filter dataset so only Albuquerque cartographic boundary is displayed
-3. Verify that CRS on all datasets is 4326/WGS84
-4. Convert all data to geoJSON
-5. Create web map
 
 #### Create Files and Install Packages
 1. Create *package.json* using `npm init`
@@ -79,5 +72,6 @@
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
     <script src="libs/Leaflet.markercluster/leaflet.markercluster.js"></script>
 ```
+6. Add last bit of custom JS replacing the markers with the markers displayed as clusters.
 
 
