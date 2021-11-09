@@ -117,7 +117,7 @@
         // create new markerClusterGroup
         const markers = L.markerClusterGroup();
 
-        // loop through all our signals features
+        // loop through all our lights features
         lights.features.forEach(function(feature) {
           // create a new Leaflet marker for each
           let coords = feature.geometry.coordinates;
@@ -132,7 +132,6 @@
         });
         // add the markerClusterGroup to the map
         map.addLayer(markers);
-
 
         // create a layerGroup with the geojson data
         const regionsLayerGroup = L.geoJson(regions, {
